@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns		= "http://www.w3.org/ns/widgets"
+	xmlns:gap	= "http://phonegap.com/ns/1.0"
+	id		= "com.doublebeamdesign"
+	version 	= "0.1">
+
+	<name>Thinner Wallet</name>
+
+	<description>
+        An app to collect barcode-based frequent-buyer cards
+	</description>
+
+	<author href="http://www.doublebeamdesign.com"
+		email="dbdg@doublebeamdesign.com">
+		Double Beam Design Group
+	</author>
+
+  <gap:plugin name="BarcodeScanner"/>
+	
+  <feature name="http://api.phonegap.com/1.0/device" />
+
+	<preference name="target-device" value="handset" />
+	<preference name="fullscreen" value="true" />
+	<preference name="orientation" value="portrait" />
+	
+</widget>
