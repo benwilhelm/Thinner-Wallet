@@ -1,54 +1,62 @@
-function supports_html5_storage() {
-  try {
-    return 'localStorage' in window && window['localStorage'] !== null ;
-  } catch (e) {
-    console.log('LocalStorge not supported') ;
-    console.log(e.message) ;
-    return false ;
+seed_data() ;
+
+$('[data-role="page"]').live('pagebeforecreate',function(e){
+  var headerHtml = $('#header_html').html() ;
+  $(this).find('[data-role="header"]').html(headerHtml) ;
+  //var footerHtml = $('#include_footer').html() ;
+  //$(this).find('[data-role="footer"]').html(footerHtml) ;
+}) ;
+
+$('[data-role="page"]').live('pageinit',function(e){
+  $("#new .scan").click(function(e){
+    console.log('click') ;
+    e.preventDefault() ;
+    try {
+      window.plugins.barcodeScanner.scan(function(args) {
+        $("input#card_format").val(args.format) ;
+        $("input#card_code").val(args.text) ;
+        $('#new .bc').barcode(args.text,args.format) ;
+      });
+    } catch (ex) {
+      console.log(ex.message) ;
+      $("#new .bc").html("could not scan") ;
+    }
+  }) ;
+});
+
+$('#home').live('pageinit',function(e) {
+  $list = $("<ul data-role='listview' data-inset='true'></ul>") ;
+  var cards = db.cards.all() ;
+  for (var j=0; j<=cards.length-1; j++) {
+    var card = cards[j] ;
+    $list.append("<li><a href='#card' data-idx='" + card.index + "'>" + card.name + "</a></li>") ;
   }
-}
+  $(this).find("[data-role='content']").html($list) ;
+  $(this).trigger("create") ;
+  $links = $list.find('a') ;
+  $links.click(function(e){
+    e.stopPropagation() ;
+    e.preventDefault() ;
+    var card_id = $(this).attr('data-idx') ;
+    $('#card').attr('data-card-id',card_id) ;
+    $.mobile.changePage("#card") ;
+  }) ;
+}) ;
 
-
-function seed_data() {
-  if (supports_html5_storage()) {
-    localStorage.clear() ;
-    var cvs = {
-      name: 'CVS',
-      format: 'ean8',
-      code: "9876543"
-    } ;
-    var dom = {
-      name: 'Dominick\'s',
-      format: 'ean8',
-      code: "3456789"
-    } ;    
-    
-    db.cards.add(cvs) ;
-    pausecomp(100) ;
-    db.cards.add(dom) ;
-
+$('#card').live('pageshow',function(e){
+  var card_id = $(this).attr('data-card-id') ;
+  var $content = $(this).find("[data-role='content']") ;
+  if (card_id) {
+    var card = db.cards.fetch(card_id) ;
+    $content.find("#card_name_heading").html(card.name) ;
+    console.log(card.code) ;
+    console.log(card.format) ;
+    $content.find(".bc").barcode(card.code,card.format) ;
   } else {
-    alert ("Could not seed data. No HTML5 Storage") ;
+    $content.find("#card_name_heading").html("Bad ID") ;
   }
-}
+}) ;
 
-String.prototype.replaceAll = function(strTarget, strSubString ){
-  var strText = this;
-  var intIndexOfMatch = strText.indexOf( strTarget );
-   
-  while (intIndexOfMatch != -1){
-    strText = strText.replace( strTarget, strSubString )
-    intIndexOfMatch = strText.indexOf( strTarget );
-  }
-
-  return( strText );
-}
-
-
-function pausecomp(millis)
- {
-  var date = new Date();
-  var curDate = null;
-  do { curDate = new Date(); }
-  while(curDate-date < millis);
-}
+$('#new').live('pageshow',function(e) {
+  
+}) ;
