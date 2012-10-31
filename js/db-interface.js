@@ -13,8 +13,8 @@ db = {
       var stamp = new Date().getTime().toString() ;
       var idx = 'cards.' + stamp ;
       var str = JSON.stringify(obj) ;
-      var saved = localStorage.setItem(idx,str) ;
-      return saved ? stamp : false ;
+      localStorage.setItem(idx,str) ;
+      return stamp ;
     },
     
     all: function() {

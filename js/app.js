@@ -64,7 +64,7 @@ $('#new').live('pageinit',function(e) {
     var card_name = $page.find("input#card_name").val() ;
     var card_code = $page.find("input#card_code").val() ;
     var card_format = $page.find("input#card_format").val() ;
-    if ( name && code && format ) {
+    if ( card_name && card_code && card_format ) {
       var obj = {
         name: card_name,
         code: card_code,
