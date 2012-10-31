@@ -32,7 +32,6 @@ $('#home').live('pageinit',function(e) {
 
 $('#new').live('pageinit',function(e) {
   $("#new .scan").click(function(e){
-    e.preventDefault() ;
     try {
       window.plugins.barcodeScanner.scan(function(args) {
         var card_format = filter_format(args.format) ;
