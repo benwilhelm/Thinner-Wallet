@@ -8,20 +8,7 @@ $('[data-role="page"]').live('pagebeforecreate',function(e){
 }) ;
 
 $('[data-role="page"]').live('pageinit',function(e){
-  $("#new .scan").click(function(e){
-    console.log('click') ;
-    e.preventDefault() ;
-    try {
-      window.plugins.barcodeScanner.scan(function(args) {
-        $("input#card_format").val(args.format) ;
-        $("input#card_code").val(args.text) ;
-        $('#new .bc').barcode(args.text,args.format) ;
-      });
-    } catch (ex) {
-      console.log(ex.message) ;
-      $("#new .bc").html("could not scan<br>" + ex.message) ;
-    }
-  }) ;
+
 });
 
 $('#home').live('pageinit',function(e) {
@@ -43,6 +30,26 @@ $('#home').live('pageinit',function(e) {
   }) ;
 }) ;
 
+$('#new').live('pageinit',function(e) {
+  $("#new .scan").click(function(e){
+    console.log('click') ;
+    e.preventDefault() ;
+    try {
+      window.plugins.barcodeScanner.scan(function(args) {
+        $("input#card_format").val(args.format) ;
+        $("input#card_code").val(args.text) ;
+        $('#new .bc').barcode(args.text,args.format) ;
+      });
+    } catch (ex) {
+      console.log(ex.message) ;
+      $("#new .bc").html("could not scan<br>" + ex.message) ;
+    }
+  }) ;
+}) ;
+
+
+
+
 $('#card').live('pageshow',function(e){
   var card_id = $(this).attr('data-card-id') ;
   var $content = $(this).find("[data-role='content']") ;
@@ -57,6 +64,3 @@ $('#card').live('pageshow',function(e){
   }
 }) ;
 
-$('#new').live('pageshow',function(e) {
-  
-}) ;
