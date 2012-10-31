@@ -3,13 +3,10 @@ scanner = {
     try {
       window.plugins.barcodeScanner.scan(function(args) {
         args.success = true ;
-        args.scanned = !args.cancelled ;
         return args ;
       }) ;
     } catch (ex) {
-      ex.success = true ;
-      ex.text = "987654334567" ;
-      ex.format = "EAN_13" ;
+      ex.success = false ;
       return ex ;
     }
   },
@@ -30,6 +27,7 @@ scanner = {
 
     if (bcWidth > wWidth || bcHeight > wHeight) {
       opts.barWidth = 1 ;
+      opts.moduleSize = 3 ;
       $obj.barcode(txt,format,opts) ;
     }
   }
