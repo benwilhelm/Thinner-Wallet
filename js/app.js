@@ -12,6 +12,7 @@ $('[data-role="page"]').live('pageinit',function(e){
 });
 
 $('#home').live('pageinit',function(e) {
+  var $page = $(this) ;
   $list = $("<ul data-role='listview' data-inset='true'></ul>") ;
   var cards = db.cards.all() ;
   for (var j=0; j<=cards.length-1; j++) {
@@ -27,6 +28,11 @@ $('#home').live('pageinit',function(e) {
     var card_id = $(this).attr('data-idx') ;
     $('#card').attr('data-card-id',card_id) ;
     $.mobile.changePage("#card") ;
+  }) ;
+  
+  $page.find("[data-role='back']").click(function(e){
+    e.stopPropagation() ;
+    navigator.app.exitApp() ;
   }) ;
 }) ;
 
