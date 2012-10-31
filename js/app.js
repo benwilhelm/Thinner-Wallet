@@ -31,19 +31,21 @@ $('#home').live('pageinit',function(e) {
 }) ;
 
 $('#new').live('pageinit',function(e) {
-  $("#new .scan").click(function(e){
+  var $page = $(this) ;
+  $page.find(".scan").click(function(e){
     try {
+      $page.find('.status').html('scanning...<br>') ;
       window.plugins.barcodeScanner.scan(function(args) {
         var card_format = filter_format(args.format) ;
         var card_code = args.text ;
         $("input#card_format").val(card_format) ;
         $("input#card_code").val(card_code) ;
-        $('#new .bc').barcode(card_code,card_format) ;
-        $('#new .status').html("Scanned!<br>Code:" + card_code + "<br>Format:" + card_format) ;
+        $page.find('.bc').barcode(card_code,card_format) ;
+        $page.find('.status').append("Scanned!<br>Code:" + card_code + "<br>Format:" + card_format) ;
       });
     } catch (ex) {
       console.log(ex.message) ;
-      $("#new .bc").html("could not scan<br>" + ex.message) ;
+      $page.find(".bc").append("Could not scan.<br>" + ex.message) ;
     }
   }) ;
 }) ;
