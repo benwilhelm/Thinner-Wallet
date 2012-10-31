@@ -1,13 +1,12 @@
 scanner = {
-  scan: function() {
+  scan: function(callback) {
     try {
       window.plugins.barcodeScanner.scan(function(args) {
         args.success = true ;
-        return args ;
+        callback(args) ;
       }) ;
     } catch (ex) {
-      ex.success = false ;
-      return ex ;
+      $('.status').html("Could not scan<br>" + ex.message) ;
     }
   },
   

@@ -25,15 +25,12 @@ $('#new').live('pageinit',function(e) {
   var $status = $page.find('.status') ;
   $page.find(".scan").click(function(e){
     $status.html("Scanning...<br>") ;
-    var rslt = scanner.scan() ;
-    if (rslt.success && !rslt.cancelled) {
+    scanner.scan(function(rslt){
       $("input#card_format").val(rslt.text) ;
       $("input#card_code").val(rslt.format) ;
       scanner.print(rslt.text,rslt.format,$bc) ;
       $status.append("Format: " + rslt.format + "<br>Code: " + rslt.text ) ;
-    } else {
-      $bc.html("Could not scan<br>" + rslt.message) ;
-    }
+    }) ;
   }) ;
   
   $page.find(".save").click(function(e){
