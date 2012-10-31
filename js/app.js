@@ -32,14 +32,15 @@ $('#home').live('pageinit',function(e) {
 
 $('#new').live('pageinit',function(e) {
   $("#new .scan").click(function(e){
-    console.log('click') ;
     e.preventDefault() ;
     try {
       window.plugins.barcodeScanner.scan(function(args) {
-        $("input#card_format").val(args.format) ;
-        $("input#card_code").val(args.text) ;
-        $('#new .bc').barcode(args.text,args.format) ;
-        $('#new .status').html("Scanned!<br>Text:" + args.text + "<br>Format:" + args.format) ;
+        var card_format = filter_format(args.format) ;
+        var card_code = args.text ;
+        $("input#card_format").val(card_format) ;
+        $("input#card_code").val(card_code) ;
+        $('#new .bc').barcode(card_code,card_format) ;
+        $('#new .status').html("Scanned!<br>Code:" + card_code + "<br>Format:" + card_format) ;
       });
     } catch (ex) {
       console.log(ex.message) ;
@@ -57,8 +58,6 @@ $('#card').live('pageshow',function(e){
   if (card_id) {
     var card = db.cards.fetch(card_id) ;
     $content.find("#card_name_heading").html(card.name) ;
-    console.log(card.code) ;
-    console.log(card.format) ;
     $content.find(".bc").barcode(card.code,card.format) ;
   } else {
     $content.find("#card_name_heading").html("Bad ID") ;

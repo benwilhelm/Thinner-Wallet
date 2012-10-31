@@ -25,11 +25,5 @@ db = {
       return ret ;
     }
     
-  },
-  
-  slugify: function(str) {
-    var ret = str.toLowerCase().replaceAll(' ','-') ;
-    ret = ret.replace(/[^a-zA-Z 0-9 -]+/g,'');
-    return ret ;
-  }
+  } 
 }
