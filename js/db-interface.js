@@ -10,9 +10,11 @@ db = {
     },
     
     add: function(obj) {
-      var idx = 'cards.' + new Date().getTime().toString() ;
+      var stamp = new Date().getTime().toString() ;
+      var idx = 'cards.' + stamp ;
       var str = JSON.stringify(obj) ;
-      localStorage.setItem(idx,str) ;
+      var saved = localStorage.setItem(idx,str) ;
+      return saved ? stamp : false ;
     },
     
     all: function() {
