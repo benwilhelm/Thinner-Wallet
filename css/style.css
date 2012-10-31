@@ -1,1 +1,9 @@
+body { background-color: #fff }
+
+.ui-header { height: 60px; }
+.ui-header .ui-title, .ui-footer .ui-title { font-size: large; font-weight: normal; line-height: 20px;}
+.ui-header .ui-btn-inner { min-width: 50px; font-size: large !important; font-weight: bold !important; }
 .hide { display: none } 
+
+#card_name_heading { text-align: center; }
+#card .bc { position: relative; margin: 1em auto; }

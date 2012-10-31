@@ -17,20 +17,21 @@
 <body> 
 
 <div data-role="page" id="home">
-	<div data-role="header" data-position="fixed"></div><!-- /header -->
+	<div class='header' data-role="header" data-position="fixed"></div><!-- /header -->
 	<div data-role="content"></div><!-- /content -->
 </div><!-- #home -->
 
 <div data-role='page' id='card'>
-	<div data-role="header" data-position="fixed"></div><!-- /header -->
+	<div class='header' data-role="header" data-position="fixed"></div><!-- /header -->
 	<div data-role="content">
 	  <h1 id="card_name_heading"></h1>
 	  <div class="bc"></div>
+	  <a class="delete" data-role="button" href="#home">Delete</a>
 	</div>
 </div><!-- #new -->
 
 <div data-role='page' id='new'>
-	<div data-role="header" data-position="fixed"></div><!-- /header -->
+	<div class='header' data-role="header" data-position="fixed"></div><!-- /header -->
 	<div data-role="content">
 	  <form>
 	    <label for="card_name">Card Name:</label>
@@ -51,7 +52,7 @@
 
 <div id='header_html' class="hide">
 	<h1>Your Thinner Wallet</h1>
-	<a href="/" data-rel='back'>&larr;</a>
+	<a href="#home" class="home-button">H</a>
 	<a href="#new">+</a>
 </div>
 
