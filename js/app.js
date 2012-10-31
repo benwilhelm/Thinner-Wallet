@@ -46,8 +46,12 @@ $('#new').live('pageinit',function(e) {
         var card_code = args.text ;
         $("input#card_format").val(card_format) ;
         $("input#card_code").val(card_code) ;
-        $page.find('.bc').barcode(card_code,card_format) ;
-        $page.find('.status').append("Scanned!<br>Code:" + card_code + "<br>Format:" + card_format) ;
+        $page.find('.bc').barcode(card_code,card_format,{barWidth:2,barHeight:100}) ;
+        $page.find('.status').html("Scanned!") ;
+        
+        if (card_format == 'qrcode') {
+          $(".status").html("We do not handle QR Codes at this time.") ;
+        }
       });
     } catch (ex) {
       console.log(ex.message) ;
@@ -59,13 +63,22 @@ $('#new').live('pageinit',function(e) {
 
 
 
-$('#card').live('pageshow',function(e){
+
+
+$('#new').live('pagebeforeshow',function(e){
+  var $page = $(this) ;
+  $page.find('input').val('') ;
+  $page.find('.bc').html('') ;
+  $page.find('.status').html('') ;
+}) ;
+
+$('#card').live('pagebeforeshow',function(e){
   var card_id = $(this).attr('data-card-id') ;
   var $content = $(this).find("[data-role='content']") ;
   if (card_id) {
     var card = db.cards.fetch(card_id) ;
     $content.find("#card_name_heading").html(card.name) ;
-    $content.find(".bc").barcode(card.code,card.format) ;
+    $content.find(".bc").barcode(card.code,card.format,{barWidth:2,barHeight:100}) ;
   } else {
     $content.find("#card_name_heading").html("Bad ID") ;
   }
