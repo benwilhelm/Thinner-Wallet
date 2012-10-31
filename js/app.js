@@ -19,7 +19,7 @@ $('[data-role="page"]').live('pageinit',function(e){
       });
     } catch (ex) {
       console.log(ex.message) ;
-      $("#new .bc").html("could not scan") ;
+      $("#new .bc").html("could not scan<br>" + ex.message) ;
     }
   }) ;
 });
