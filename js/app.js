@@ -39,6 +39,7 @@ $('#new').live('pageinit',function(e) {
         $("input#card_format").val(args.format) ;
         $("input#card_code").val(args.text) ;
         $('#new .bc').barcode(args.text,args.format) ;
+        $('#new .status').html("Scanned!<br>Text:" + args.text + "<br>Format:" + args.format) ;
       });
     } catch (ex) {
       console.log(ex.message) ;
