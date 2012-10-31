@@ -8,25 +8,22 @@
   <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
   <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
   <script src="js/jquery-barcode-2.0.2.min.js"></script>
+  <script src="js/db-interface.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/js.js"></script>
 </head> 
 <body> 
 
 <div data-role="page" id="home">
 	<div data-role="header" data-position="fixed"></div><!-- /header -->
-	<div data-role="content">	
-    <ul data-role='listview' data-inset='true'>
-  		<li><a href="#card">CVS</a></li>		
-  		<li><a href="#card">Sports Authority</a></li>		
-  		<li><a href="#card">Walgreens</a></li>		
-    </ul><!-- list-view -->
-	</div><!-- /content -->
+	<div data-role="content"></div><!-- /content -->
 </div><!-- #home -->
 
 <div data-role='page' id='card'>
 	<div data-role="header" data-position="fixed"></div><!-- /header -->
 	<div data-role="content">
-	  <p>Show existing card here</p>
+	  <h1 id="card_name"></h1>
+	  <div id="bc"></div>
 	</div>
 </div><!-- #new -->
 
