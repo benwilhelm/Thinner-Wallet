@@ -6,4 +6,5 @@ body { background-color: #fff }
 .hide { display: none } 
 
 #card_name_heading { text-align: center; }
-#card .bc { position: relative; margin: 1em auto; }
+.bc { position: relative; margin: 1em auto; }
+.status { font-size: small; }

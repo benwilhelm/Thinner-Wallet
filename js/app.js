@@ -21,24 +21,18 @@ $('#home').live('pageinit',function(e) {
 
 $('#new').live('pageinit',function(e) {
   var $page = $(this) ;
+  var $bc = $page.find('.bc') ;
+  var $status = $page.find('.status') ;
   $page.find(".scan").click(function(e){
-    try {
-      $page.find('.status').html('scanning...<br>') ;
-      window.plugins.barcodeScanner.scan(function(args) {
-        var card_format = filter_format(args.format) ;
-        var card_code = args.text ;
-        $("input#card_format").val(card_format) ;
-        $("input#card_code").val(card_code) ;
-        $page.find('.bc').barcode(card_code,card_format,{barWidth:2,barHeight:100,bgColor:"#F3F3F3"}) ;
-        $page.find('.status').html("Scanned!") ;
-        
-        if (card_format == 'qrcode') {
-          $(".status").html("We do not handle QR Codes at this time.") ;
-        }
-      });
-    } catch (ex) {
-      console.log(ex.message) ;
-      $page.find(".bc").append("Could not scan.<br>" + ex.message) ;
+    $status.html("Scanning...<br>") ;
+    var rslt = scanner.scan() ;
+    if (rslt.success && !rslt.cancelled) {
+      $("input#card_format").val(rslt.text) ;
+      $("input#card_code").val(rslt.format) ;
+      scanner.print(rslt.text,rslt.format,$bc) ;
+      $status.append("Format: " + rslt.format + "<br>Code: " + rslt.text ) ;
+    } else {
+      $bc.html("Could not scan<br>" + rslt.message) ;
     }
   }) ;
   
@@ -111,10 +105,13 @@ $('#new').live('pagebeforeshow',function(e){
 $('#card').live('pagebeforeshow',function(e){
   var card_id = $(this).attr('data-card-id') ;
   var $content = $(this).find("[data-role='content']") ;
+  var $status = $(this).find('.status') ;
+  var $bc = $content.find('.bc') ;
   if (card_id) {
     var card = db.cards.fetch(card_id) ;
     $content.find("#card_name_heading").html(card.name) ;
-    $content.find(".bc").barcode(card.code,card.format,{barWidth:2,barHeight:100,bgColor:"#F3F3F3"}) ;
+    scanner.print(card.code, card.format, $bc) ;
+    $status.html("Format: " + card.format + "<br>Code: " + card.code )
   } else {
     $content.find("#card_name_heading").html("Bad ID") ;
   }
