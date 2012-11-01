@@ -26,8 +26,8 @@ $('#new').live('pageinit',function(e) {
   $page.find(".scan").click(function(e){
     $status.html("Scanning...<br>") ;
     scanner.scan(function(rslt){
-      $("input#card_format").val(rslt.text) ;
-      $("input#card_code").val(rslt.format) ;
+      $("input#card_format").val(rslt.format) ;
+      $("input#card_code").val(rslt.text) ;
       scanner.print(rslt.text,rslt.format,$bc) ;
       $status.append("Format: " + rslt.format + "<br>Code: " + rslt.text ) ;
     }) ;
@@ -103,7 +103,7 @@ $('#card').live('pagebeforeshow',function(e){
   var card_id = $(this).attr('data-card-id') ;
   var $content = $(this).find("[data-role='content']") ;
   var $status = $(this).find('.status') ;
-  var $bc = $content.find('.bc') ;
+  var $bc = $(this).find('.bc') ;
   if (card_id) {
     var card = db.cards.fetch(card_id) ;
     $content.find("#card_name_heading").html(card.name) ;
