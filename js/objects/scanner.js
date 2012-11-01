@@ -11,6 +11,7 @@ scanner = {
   },
   
   print: function(txt,fmt,$obj) {
+    $obj.html('Could not print code of this type.') ;
     var format = filter_format(fmt) ;
     var opts = {
       barWidth:2,
