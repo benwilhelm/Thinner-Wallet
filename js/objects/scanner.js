@@ -6,7 +6,7 @@ scanner = {
         callback(args) ;
       }) ;
     } catch (ex) {
-      $('.status').html("Could not scan<br>" + ex.message) ;
+      mobile_alert.alert("<strong>Error scanning your card</strong><br>" + ex.message) ;
     }
   },
   
@@ -16,7 +16,7 @@ scanner = {
     var opts = {
       barWidth:2,
       barHeight:100,
-      bgColor:"#F3F3F3"
+      bgColor:"#FFFFFF"
     } ;
     $obj.barcode(txt,format,opts) ;
     

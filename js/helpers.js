@@ -45,3 +45,5 @@ function pausecomp(millis)
   do { curDate = new Date(); }
   while(curDate-date < millis);
 }
+
+

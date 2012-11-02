@@ -12,18 +12,19 @@
   <script src="js/jquery-barcode-2.0.2.min.js"></script>
   <script src="js/objects/db-interface.js"></script>
   <script src="js/objects/scanner.js"></script>
+  <script src="js/objects/mobile-alert.js"></script>
   <script src="js/helpers.js"></script>
   <script src="js/app.js"></script>
 </head> 
 <body> 
 
-<div data-role="page" id="home">
+<div data-role="page" class="page" id="home">
 	<div class='header' data-role="header" data-position="fixed"></div><!-- /header -->
 	<div data-role="content" class="content"></div><!-- /content -->
 	<div class="footer" data-role="footer" data-position="fixed"></div><!-- footer -->
 </div><!-- #home -->
 
-<div data-role='page' id='card'>
+<div data-role="page" class="page" id='card'>
 	<div class='header' data-role="header" data-position="fixed"></div><!-- /header -->
 	<div data-role="content" class="content">
 	  <h1 id="card_name_heading"></h1>
@@ -34,7 +35,7 @@
 	<div class="footer" data-role="footer" data-position="fixed"></div><!-- footer -->
 </div><!-- #new -->
 
-<div data-role='page' id='new'>
+<div data-role="page" class="page" id='new'>
 	<div class='header' data-role="header" data-position="fixed"></div><!-- /header -->
 	<div data-role="content" class="content">
 	  <form>
@@ -47,8 +48,8 @@
 	  <div class="bc"></div>
 	  <div class="status"></div>
     <div class="ui-grid-a">
-  	  <div class="ui-block-a"><a class="save green-button" href="javascript:void(0)" data-role="button">Save</a></div>
-  	  <div class="ui-block-b"><a class="cancel red-button" href="#home" data-role="button">Cancel</a></div>
+  	  <div class="ui-block-a"><a class="cancel red-button" href="#home" data-role="button">Cancel</a></div>
+  	  <div class="ui-block-b"><a class="save green-button" href="javascript:void(0)" data-role="button">Save</a></div>
     </div><!-- .ui-grid-a -->
 	</div>
 	<div class="footer" data-role="footer" data-position="fixed"></div><!-- footer -->
@@ -62,9 +63,12 @@
 </div>
 
 <div id="footer_html" class="hide">
-  <a class="quit" href="/">Quit</a>
-  <p class="copyright">&copy; 2012 Double Beam Design Group</p>
+    <a class="quit" href="/">Quit</a>
+    <p class="copyright">&copy; 2012<br/>Double Beam Design Group</p>
 </div>
+
+
+<div id="confirm"></div>
 
 </body>
 </html>

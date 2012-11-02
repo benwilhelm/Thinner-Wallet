@@ -1,12 +1,12 @@
 .ui-body-c { 
   background: #fff;
-  background-image: -webkit-gradient(linear,left top,left bottom,from( #fff ),to( #ddd ));
+  /*background-image: -webkit-gradient(linear,left top,left bottom,from( #fff ),to( #ddd ));
   background-image: -webkit-linear-gradient( #fff,#ddd );
   background-image: -moz-linear-gradient( #fff,#ddd );
   background-image: -ms-linear-gradient( #fff,#ddd );
   background-image: -o-linear-gradient( #fff,#ddd );
   background-image: linear-gradient( #fff,#ddd );  
-  color: #335; 
+  color: #335; */
 }
 
 .ui-bar-a { 
@@ -63,16 +63,25 @@
     background-image: linear-gradient( #6F6,#0C0 );
   }
 
-.ui-header { height: 60px; }
+.ui-header { border-bottom: 1px solid #000; box-shadow: 0 3px 5px #999; }
 .ui-header .ui-title, .ui-footer .ui-title { font-size: large; font-weight: normal; background-color: #666; border: 1px solid #333; border-radius: 8px; box-shadow: inset 0 1px 1px #000; line-height: normal; padding: 5px; }
 .ui-header .ui-btn { margin: 10px; }
 .hide { display: none } 
+
+#home .ui-header .home-button { display: none; }
 
 #card_name_heading { text-align: center; }
 .bc { position: relative; margin: 1em auto; }
 .status { font-size: small; }
 .content { text-align: center; }
 
-.footer { padding: 5px; }
-.copyright { font-size: x-small; font-weight: normal; }
-.quit { float: right; font-size: small; }
+.footer { padding : 5px 0; }
+.copyright { font-size: x-small; font-weight: normal; margin: 0 0 0 5px; }
+.ui-footer > .ui-btn.quit { float: right; font-size: small; margin-right:5px;}
+
+/* =Dialogs 
+============================================== */
+
+#alert { background-color: rgba(255,255,255,0.5); display: none; font-family: Helvetica, Arial, sans-serif; font-size: small; position: absolute; top: 0; left:0; width: 100%; height: 100%; z-index: 100000;  }
+  #alert_container { background-color: #FFF; border: 1px solid #AAA; border-radius: 10px; box-shadow: 0 3px 5px #999; margin: 0 auto; padding: 20px 10px; position: relative; text-align: center; top: 30%; width: 60%; }
+  #alert_buttons { margin-top: 20px; text-align: center; }

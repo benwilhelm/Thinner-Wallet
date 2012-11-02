@@ -11,6 +11,7 @@ $('[data-role="page"]').live('pageinit',function(e){
     e.stopPropagation() ;
     navigator.app.exitApp() ;
   }) ;
+
 });
 
 $('#home').live('pageinit',function(e) {
@@ -25,7 +26,6 @@ $('#new').live('pageinit',function(e) {
   var $bc = $page.find('.bc') ;
   var $status = $page.find('.status') ;
   $page.find(".scan").click(function(e){
-    $status.html("Scanning...<br>") ;
     scanner.scan(function(rslt){
       $("input#card_format").val(rslt.format) ;
       $("input#card_code").val(rslt.text) ;
@@ -35,7 +35,6 @@ $('#new').live('pageinit',function(e) {
   }) ;
   
   $page.find(".save").click(function(e){
-    console.log("click") ;
     var card_name = $page.find("input#card_name").val() ;
     var card_code = $page.find("input#card_code").val() ;
     var card_format = $page.find("input#card_format").val() ;
@@ -47,16 +46,14 @@ $('#new').live('pageinit',function(e) {
       }
       
       var card_idx = db.cards.add(obj) ;
-      console.log(card_idx) ;
       if (card_idx) {
         $('#card').attr('data-card-id',card_idx) ;
         $.mobile.changePage("#card") ;
       } else {
-        console.log("error saving card.") ;
-        $page.find(".status").html("Error saving card.") ;
+        mobile_alert.alert("Error saving card") ;
       }
     } else {
-      $page.find(".status").html("Missing Information") ;
+      mobile_alert.alert("You are missing some information.  Please make sure you have included a title for the card and scanned a bar code.")
     }
   }) ;
 }) ;
@@ -64,10 +61,13 @@ $('#new').live('pageinit',function(e) {
 $('#card').live('pageinit',function(e){
   var $page = $(this);
   $page.find('.delete').click(function(e){
-    var card_idx = $page.attr('data-card-id') ;
-    console.log(card_idx) ;
-    db.cards.remove(card_idx) ;
-    $.mobile.changePage("#home") ;
+    e.preventDefault() ;
+    e.stopPropagation() ;
+    mobile_alert.confirm("Are you sure you want to delete this card?",function(){
+      var card_idx = $page.attr('data-card-id') ;
+      db.cards.remove(card_idx) ;
+      $.mobile.changePage("#home") ;
+    }) ;
   }) ;
 }) ;
 
@@ -76,21 +76,28 @@ $('#card').live('pageinit',function(e){
 $('#home').live('pagebeforeshow',function(e){
   $page = $(this) ;
   $list = $("<ul data-role='listview' data-inset='true'></ul>") ;
+  $content = $page.find('.content') ;
   var cards = db.cards.all() ;
-  for (var j=0; j<=cards.length-1; j++) {
-    var card = cards[j] ;
-    $list.append("<li><a href='#card' data-idx='" + card.index + "'>" + card.name + "</a></li>") ;
+  if (cards.length > 0) {
+    for (var j=0; j<=cards.length-1; j++) {
+      var card = cards[j] ;
+      $list.append("<li><a href='#card' data-idx='" + card.index + "'>" + card.name + "</a></li>") ;
+    }
+    $content.html($list) ;
+    $page.trigger("create") ;
+    $links = $list.find('a') ;
+    $links.click(function(e){
+      e.stopPropagation() ;
+      e.preventDefault() ;
+      var card_id = $(this).attr('data-idx') ;
+      $('#card').attr('data-card-id',card_id) ;
+      $.mobile.changePage("#card") ;
+    }) ;
+  } else {
+    $content.html("<p>You have no saved cards.</p>") ;
+    $content.append("<a data-role='button' href='#new'>Add a Card</a>") ;
+    $page.trigger('create') ;
   }
-  $(this).find("[data-role='content']").html($list) ;
-  $(this).trigger("create") ;
-  $links = $list.find('a') ;
-  $links.click(function(e){
-    e.stopPropagation() ;
-    e.preventDefault() ;
-    var card_id = $(this).attr('data-idx') ;
-    $('#card').attr('data-card-id',card_id) ;
-    $.mobile.changePage("#card") ;
-  }) ;
 }) ;
 
 $('#new').live('pagebeforeshow',function(e){

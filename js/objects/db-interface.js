@@ -19,7 +19,6 @@ db = {
     
     remove: function(idx) {
       var full_idx = "cards." + idx ;
-      console.log(localStorage[full_idx]) ;
       localStorage.removeItem(full_idx) ;
     },
     
