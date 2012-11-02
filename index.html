@@ -19,22 +19,24 @@
 
 <div data-role="page" id="home">
 	<div class='header' data-role="header" data-position="fixed"></div><!-- /header -->
-	<div data-role="content"></div><!-- /content -->
+	<div data-role="content" class="content"></div><!-- /content -->
+	<div class="footer" data-role="footer" data-position="fixed"></div><!-- footer -->
 </div><!-- #home -->
 
 <div data-role='page' id='card'>
 	<div class='header' data-role="header" data-position="fixed"></div><!-- /header -->
-	<div data-role="content">
+	<div data-role="content" class="content">
 	  <h1 id="card_name_heading"></h1>
 	  <div class="bc"></div>
 	  <div class="status"></div>
-	  <a class="delete" data-role="button" href="#home">Delete</a>
+	  <a class="delete red-button" data-role="button" data-inline="true" href="#home">Delete</a>
 	</div>
+	<div class="footer" data-role="footer" data-position="fixed"></div><!-- footer -->
 </div><!-- #new -->
 
 <div data-role='page' id='new'>
 	<div class='header' data-role="header" data-position="fixed"></div><!-- /header -->
-	<div data-role="content">
+	<div data-role="content" class="content">
 	  <form>
 	    <label for="card_name">Card Name:</label>
 	    <input type="text" name="card_name" id="card_name" />
@@ -45,17 +47,23 @@
 	  <div class="bc"></div>
 	  <div class="status"></div>
     <div class="ui-grid-a">
-  	  <div class="ui-block-a"><a class="save" href="javascript:void(0)" data-role="button">Save</a></div>
-  	  <div class="ui-block-b"><a class="cancel" href="#home" data-role="button">Cancel</a></div>
+  	  <div class="ui-block-a"><a class="save green-button" href="javascript:void(0)" data-role="button">Save</a></div>
+  	  <div class="ui-block-b"><a class="cancel red-button" href="#home" data-role="button">Cancel</a></div>
     </div><!-- .ui-grid-a -->
 	</div>
+	<div class="footer" data-role="footer" data-position="fixed"></div><!-- footer -->
 </div><!-- #new -->
 
 
 <div id='header_html' class="hide">
-	<h1>Your Thinner Wallet</h1>
-	<a href="#home" class="home-button">H</a>
-	<a href="#new">+</a>
+	<h1>Thinner Wallet</h1>
+	<a href="#home" class="home-button" data-icon="home" data-iconpos="notext">Home</a>
+	<a href="#new" data-icon="plus" data-iconpos="notext">New</a>
+</div>
+
+<div id="footer_html" class="hide">
+  <a class="quit" href="/">Quit</a>
+  <p class="copyright">&copy; 2012 Double Beam Design Group</p>
 </div>
 
 </body>

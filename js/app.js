@@ -1,22 +1,23 @@
 $('[data-role="page"]').live('pagebeforecreate',function(e){
   var headerHtml = $('#header_html').html() ;
   $(this).find('[data-role="header"]').html(headerHtml) ;
-  //var footerHtml = $('#include_footer').html() ;
-  //$(this).find('[data-role="footer"]').html(footerHtml) ;
+  var footerHtml = $('#footer_html').html() ;
+  $(this).find('[data-role="footer"]').html(footerHtml) ;
 }) ;
 
 $('[data-role="page"]').live('pageinit',function(e){
-
+  $(".quit").click(function(e){
+    e.preventDefault() ;
+    e.stopPropagation() ;
+    navigator.app.exitApp() ;
+  }) ;
 });
 
 $('#home').live('pageinit',function(e) {
   var $page = $(this) ;  
   var $homeBtn = $page.find(".home-button") ;
-  $homeBtn.find('span').html('X') ;
-  $homeBtn.click(function(e){
-    e.stopPropagation() ;
-    navigator.app.exitApp() ;
-  }) ;
+  $homeBtn.attr('data-icon','delete') ;
+  $page.trigger('create') ;
 }) ;
 
 $('#new').live('pageinit',function(e) {
