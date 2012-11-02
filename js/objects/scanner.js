@@ -11,7 +11,7 @@ scanner = {
   },
   
   print: function(txt,fmt,$obj) {
-    $obj.html('Could not print code of this type.') ;
+    $obj.html('This application cannot currently print ' + fmt + ' bar codes.') ;
     var format = filter_format(fmt) ;
     var opts = {
       barWidth:2,
