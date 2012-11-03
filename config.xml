@@ -2,16 +2,16 @@
 <widget xmlns		= "http://www.w3.org/ns/widgets"
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	id		= "com.doublebeamdesign.thinner-wallet"
-	version 	= "0.1">
+	version 	= "1.0">
 
 	<name>Thinner Wallet</name>
 
 	<description>
-        An app to collect barcode-based frequent-buyer cards
+        An app to collect barcode-based frequent-buyer cards. If you're tired of carrying dozens of frequent buyer cards on your keychain or in your wallet, this is your app. Simply use your phone's camera to scan the cards' barcodes and you can keep them all in one handy place.
 	</description>
 
 	<author href="http://www.doublebeamdesign.com"
-		email="dbdg@doublebeamdesign.com">
+		email="hello@doublebeamdesign.com">
 		Double Beam Design Group
 	</author>
 
