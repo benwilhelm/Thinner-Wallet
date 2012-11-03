@@ -19,6 +19,7 @@ db = {
     
     remove: function(idx) {
       var full_idx = "cards." + idx ;
+      console.log(localStorage[full_idx]) ;
       localStorage.removeItem(full_idx) ;
     },
     
@@ -28,7 +29,12 @@ db = {
         if (idx.substring(0,6) == 'cards.') {
           ret.push(db.cards.fetch(idx)) ;
         }
-      }      
+      }  
+      
+      ret.sort(function(a,b) {
+        return a.name > b.name ;
+      }) ;
+          
       return ret ;
     }
     
